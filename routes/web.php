@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredTenantController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::group(['namespace' => 'Controllers\Auth'], function () {
+    // Registration Routes...
+    Route::get('register-tenant', [RegisteredTenantController::class,'create'])->name('register-tenant');
+    Route::post('register-tenant', [RegisteredTenantController::class,'store']);
 });
 
 require __DIR__.'/auth.php';

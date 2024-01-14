@@ -1,6 +1,21 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register-tenant') }}">
         @csrf
+
+        <!-- Company Name -->
+        <div>
+            <x-input-label for="tenant_id" :value="__('Company')" />
+            <x-text-input id="tenant_id" class="block mt-1 w-full" type="name" autocomplete="tenant_id" name="tenant_id" :value="old('tenant_id')" required autofocus autocomplete="Church" />
+            <x-input-error :messages="$errors->get('tenant_id')" class="mt-2" />
+        </div>
+
+        <!-- Sub Domain -->
+        <div>
+            <x-input-label for="domain" :value="__('domain')" />
+            <x-text-input id="domain" class="block mt-1 w-full" type="text" name="domain" :value="old('domain')" required autofocus autocomplete="Domain" />
+            <span class="text-gray-500 sm:text-sm" id="price-currency">.{{ config('tenancy.central_domains')[0] }}</span>
+            <x-input-error :messages="$errors->get('domain')" class="mt-2" />
+        </div>
 
         <!-- Name -->
         <div>
